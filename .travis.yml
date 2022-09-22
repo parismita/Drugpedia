@@ -4,5 +4,7 @@ python:
 install:
  - python setup.py install
 script:
-  - python tests.py
+ - echo "Initiating..."
+ - python tests.py
+ - echo "Success ^-^"
   
