@@ -1,4 +1,5 @@
-# CS699
+# CS699 
+![ci/cd](https://github.com/parismita/CS699/actions/workflows/python-app.yml/badge.svg)
 
 # Rules
 - Never merge your own commit without review check into the main branch
