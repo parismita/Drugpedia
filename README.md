@@ -2,6 +2,7 @@
 [![Python application](https://github.com/parismita/Drugpedia/actions/workflows/python-app.yml/badge.svg)](https://github.com/parismita/Drugpedia/actions/workflows/python-app.yml)
 
 
+
 # Introduction
 (write the description here). This project is starting off as an assignment to the course CS699 Software Lab, guided by Prof. Bhaskar Raman, from Indian Institute of Technology, Bombay.
 
