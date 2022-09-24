@@ -1,5 +1,6 @@
-# DrugSpy
-[![Python application](https://github.com/parismita/DrugSpy/actions/workflows/python-app.yml/badge.svg)](https://github.com/parismita/DrugSpy/actions/workflows/python-app.yml)
+# Drugpedia
+[![Python application](https://github.com/parismita/Drugpedia/actions/workflows/python-app.yml/badge.svg)](https://github.com/parismita/Drugpedia/actions/workflows/python-app.yml)
+
 
 
 # Introduction
