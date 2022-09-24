@@ -1,5 +1,8 @@
-# CS699 
-![ci/cd](https://github.com/parismita/CS699/actions/workflows/python-app.yml/badge.svg)
+# DrugSpy
+![ci/cd](https://github.com/parismita/DrupSpy/actions/workflows/python-app.yml/badge.svg)
+
+# Introduction
+(write the description here). This project is starting off as an assignment to the course CS699 Software Lab, guided by Prof. Bhaskar Raman, from Indian Institute of Technology, Bombay.
 
 # Instalation guidelines
 - write down installation procedure here
