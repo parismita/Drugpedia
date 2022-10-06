@@ -5,23 +5,21 @@
 
 
 # Introduction
-(write the description here). This project is starting off as an assignment to the course CS699 Software Lab, guided by Prof. Bhaskar Raman, from Indian Institute of Technology, Bombay.
+This project is developed by Parismita Das (22M0815) and Vaibhav Singh (22M0827). Our aim is to implement a platform where a user can find all the details related to the prescribed medicine and its ingredient compositions and their potential roles. This project is starting off as an assignment to the course CS699 Software Lab, guided by Prof. Bhaskar Raman, from Indian Institute of Technology, Bombay. 
 
 # Instalation guidelines
 - write down installation procedure here
 
-# Usage
-- write down how to use the software here, give egs
-
 # Dependancies
-- write down dependancies here
+- Python 3
+- Makefile
+- psycopg2
+- beautifulsoup4
+- Flask
 
 # Contribution guidelines
-Welcome to DrugSpy and thank you for your interest in this project!!
+Welcome to Drugpedia and thank you for your interest in this project!!
 Here are some guidelines to help you get onboard and some rules which we follow.
-
-## Installation and Setup for Dev
-(mention dev setup guidelines)
 
 ## How to Contribute?
 To find something to contribute to, please checkout our issue tracker, we actively maintain the list of todos as well as bugs. If you are new, you may look for the labels such as "good first issue" or "easy issue".
@@ -47,7 +45,4 @@ Thank you thats all!! Congratulations on your first contrib <3
 
 # Todos
 - Mentioned in Issue Tracker
-
-# Dev Notes
-- write down dev instructions here
 
