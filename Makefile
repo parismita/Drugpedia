@@ -1,4 +1,5 @@
 all: lint run test
+build: lint run test clean
 
 run: setup
 	python3 main.py
