@@ -8,14 +8,18 @@
 This project is developed by Parismita Das (22M0815) and Vaibhav Singh (22M0827). Our aim is to implement a platform where a user can find all the details related to the prescribed medicine and its ingredient compositions and their potential roles. This project is starting off as an assignment to the course CS699 Software Lab, guided by Prof. Bhaskar Raman, from Indian Institute of Technology, Bombay. 
 
 # Instalation guidelines
-- write down installation procedure here
+- clone the repo using `git clone https://github.com/parismita/Drugpedia.git`
+- run `make`
 
 # Dependancies
-- Python 3
+- Python 3.6+
 - Makefile
 - psycopg2
 - beautifulsoup4
-- Flask
+- Flask 2.2
+- Flake 8
+
+Mentioned in requirements.txt
 
 # Contribution guidelines
 Welcome to Drugpedia and thank you for your interest in this project!!
@@ -32,7 +36,7 @@ To submit to an issue, here are some guildelines and rules:
 - Always create your own branch while working on something.
 - Branch name format: \<author\>/<branch_type>/\<module\>, eg: parismita/feature/init or parismita/bug/user_login
 - Never merge your own commit without review check and github action success, into the main branch
-- Please, Don't edit/create files directly to main branch without PRs  
+- Please, Don't edit/create files directly to main branch without PRs
 - To Review a PR, please Squash and Merge while merging any PR, after the GitHub Actions are passing :)
 - All Communications to be done via Issue Tracker
 
