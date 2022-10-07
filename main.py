@@ -7,19 +7,29 @@ from src.models.medicine import db
 
 # getting env variables from .env
 load_dotenv()
-USER = os.getenv('USER')| "postgresql"
-PASS = os.getenv('PASS')| ""
-HOST = os.getenv('HOST')| "localhost"
-DB = os.getenv('DB')| "drugpedia"
+USER = os.getenv('USER')
+PASS = os.getenv('PASS')
+HOST = os.getenv('HOST')
+DB = os.getenv('DB')
 basedir = os.path.abspath(os.path.dirname(__file__))
 print(basedir)
 
 # initializing flask and configuring sqlalchemy orm
 
 
+def none_check(str, default):
+    if (str is None):
+        return (default)
+    return (str)
+
+
 def create_app():
     app = Flask(__name__, template_folder='src/templates')
-    uri = USER+":" + PASS + "@" + HOST + "/" + DB
+    uri = none_check(USER, "postgresql")+":" + \
+        none_check(PASS, "") + "@" + \
+        none_check(HOST, "localhost") + "/" + \
+        none_check(DB, "drugpedia")
+        
     app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://" + uri
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
