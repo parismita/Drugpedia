@@ -11,7 +11,7 @@ lint: setup autopep
 	flake8 main.py
 	
 autopep: setup
-	autopep8 --in-place main.py
+	autopep8 --in-place *.py
     
 setup: requirements.txt
 	pip3 install -r requirements.txt
