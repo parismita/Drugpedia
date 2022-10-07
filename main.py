@@ -7,10 +7,10 @@ from src.models.medicine import db
 
 # getting env variables from .env
 load_dotenv()
-USER = os.getenv('USER')
-PASS = os.getenv('PASS')
-HOST = os.getenv('HOST')
-DB = os.getenv('DB')
+USER = os.getenv('USER')| "postgresql"
+PASS = os.getenv('PASS')| ""
+HOST = os.getenv('HOST')| "localhost"
+DB = os.getenv('DB')| "drugpedia"
 basedir = os.path.abspath(os.path.dirname(__file__))
 print(basedir)
 
