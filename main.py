@@ -29,7 +29,7 @@ def create_app():
         none_check(PASS, "") + "@" + \
         none_check(HOST, "localhost") + "/" + \
         none_check(DB, "drugpedia")
-        
+
     app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://" + uri
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 

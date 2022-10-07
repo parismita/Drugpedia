@@ -1,5 +1,5 @@
 all: lint run test
-build: lint run test clean
+build: lint test clean
 
 run: setup
 	python3 main.py
@@ -8,7 +8,7 @@ test: setup
 	python3 tests/test.py
 	
 lint: setup autopep
-	flake8 main.py
+	flake8 *.py
 	
 autopep: setup
 	autopep8 --in-place *.py
