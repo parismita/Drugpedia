@@ -12,3 +12,5 @@ classifiers=[ "Programming Language :: Python :: 3",
              "Operating System :: OS Independent"],
     python_requires='>=3.4',
 )
+
+#deprecated, remove and use setup.cfg
