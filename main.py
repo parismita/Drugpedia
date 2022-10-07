@@ -19,8 +19,8 @@ print(basedir)
 
 def create_app():
     app = Flask(__name__, template_folder='src/templates')
-
-    app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://" + USER+":" + PASS + "@" + HOST + "/" + DB
+    uri = USER+":" + PASS + "@" + HOST + "/" + DB
+    app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://" + uri
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     db.init_app(app)
