@@ -15,11 +15,12 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 print(basedir)
 
 # initializing flask and configuring sqlalchemy orm
+
+
 def create_app():
     app = Flask(__name__, template_folder='src/templates')
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://' + \
-        USER+':'+PASS+'@'+HOST+'/'+DB
+    app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://" + USER+":" + PASS + "@" + HOST + "/" + DB
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     db.init_app(app)
@@ -28,13 +29,15 @@ def create_app():
 
 app = create_app()
 
-#all blurprints here
+# all blurprints here
 app.register_blueprint(med, url_prefix='/med')
 
-#migrate
+# migrate
 migrate = Migrate(app, db)
 
-#main page 
+# main page
+
+
 @app.route('/')
 def index():
     return render_template('index.html')

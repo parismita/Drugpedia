@@ -7,7 +7,7 @@ run: setup
 test: setup
 	python3 tests/test.py
 	
-lint: setup autopep
+lint: setup
 	flake8 main.py
 	
 autopep: setup
