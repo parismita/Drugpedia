@@ -2,7 +2,8 @@ import json
 from src.models.medicine import Med
 from src.utils.initdb import db
 
-def insert_logic():
+# example service
+"""def insert_logic():
     #data = json.load(open("data.json", 'r'))  # reading file data.json
     example = Inserttable(
             machineid=data["MachineId"], 
@@ -17,8 +18,8 @@ def insert_logic():
     db.session.add(example)
     db.session.commit()
     return '==================DATA INSERTED=================='
-
-def medadd():
+"""
+def insert_logic():
     pname = request.form["pname"]
     color = request.form["color"]
     entry = Med(pname, color)
