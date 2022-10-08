@@ -1,4 +1,4 @@
-from initdb import db
+from src.utils.initdb import db
 
 class Ingredients(db.Model):
     id = db.Column(db.Integer, primary_key=True)
