@@ -1,9 +1,11 @@
 import os
 from dotenv import load_dotenv
 from flask import Flask, render_template
-from src.routes.medroute import med
 from flask_migrate import Migrate
-from src.models.medicine import db
+from src.models.initdb import db
+
+# routes here
+from src.routes.medroute import med
 
 # getting env variables from .env
 load_dotenv()
@@ -14,13 +16,13 @@ DB = os.getenv('DB')
 basedir = os.path.abspath(os.path.dirname(__file__))
 print(basedir)
 
-# initializing flask and configuring sqlalchemy orm
-
 
 def none_check(str, default):
     if (str is None):
         return (default)
     return (str)
+
+# initializing flask and configuring sqlalchemy orm
 
 
 def create_app():

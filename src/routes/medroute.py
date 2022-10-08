@@ -1,5 +1,6 @@
 from flask import render_template, request, flash, Blueprint
-from src.models.medicine import Med, db
+from src.models.medicine import Med
+from src.models.initdb import db
 
 
 med = Blueprint('med', __name__)
