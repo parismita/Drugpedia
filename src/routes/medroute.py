@@ -1,6 +1,7 @@
 from flask import render_template, request, flash, Blueprint
-from src.models.medicine import Med, db
-
+from src.models.medicine import Med
+from src.utils.initdb import db
+from src.controllers.medcontroller import index, search, create
 
 med = Blueprint('med', __name__)
 
@@ -13,4 +14,7 @@ def medadd():
     db.session.commit()
 
     return render_template("index.html")
+
+med.route('/create', methods=['GET'])(create)
+med.route('/search', methods=['GET'])(search)
 

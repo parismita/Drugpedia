@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# todo list local
+todo.txt
+
+# vc counter
+.VSCodeCounter/
