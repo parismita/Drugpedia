@@ -8,3 +8,7 @@ class Ingredients(db.Model):
     def __init__(self, pname, color):
         self.pname = pname
         self.color = color
+
+    # method used to represent a class's objects as a string
+    def __repr__(self):
+        return '<pname %r>' % self.pname

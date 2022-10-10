@@ -6,6 +6,7 @@ from src.utils.initdb import db
 
 # routes here
 from src.routes.medroute import med
+from src.routes.ingroute import ingredient
 from src.routes.homeroute import home
 
 # getting env variables from .env
@@ -45,6 +46,7 @@ app = create_app()
 # all blurprints here
 app.register_blueprint(med, url_prefix='/med')
 app.register_blueprint(home, url_prefix='/')
+app.register_blueprint(ingredient, url_prefix='/ingredient')
 
 # migrate
 migrate = Migrate(app, db)
