@@ -1,4 +1,4 @@
-all: lint run test
+all: run
 build: lint test clean
 
 run: setup

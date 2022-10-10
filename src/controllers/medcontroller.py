@@ -1,7 +1,7 @@
 import json
 from src.models.medicine import Med
 from src.utils.initdb import db, create_db
-from src.services.medservice import insert_logic
+from src.services.medservice import Vsearch, Hsearch
 
 def index():
     return {
@@ -16,5 +16,5 @@ def create():
 
 
 # insert data into table.
-def insert(): 
-    insert_logic()    
+def search(): 
+    return Vsearch("crocin")    
