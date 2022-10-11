@@ -61,7 +61,6 @@ def Hsearch(key):
     # print(df)
     return {"data": df.to_dict(orient='records')}
 
-
 # Vsearch("Pan")
 # Vsearch("s")
 # Hsearch("crocin")
