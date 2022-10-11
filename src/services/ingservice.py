@@ -14,11 +14,15 @@ def IngredientSearch(key):
 
     sections = ['uses-container', 'side-effects-container', 'precautions-container']
 
+    res = {}
     for section in sections:
         container = soup.find("div", attrs = {"class": section})
         monograph_content_headline = container.find("div", attrs = {"class": "title-bg"})
         monograph_content = container.find("div", attrs = {"class": "monograph-content"})
         title = monograph_content_headline.get_text(strip = True)
         description = monograph_content.get_text()
-        print(title)
-        print(description)
+        res[title]=description
+    return {
+        "status":source.status_code,
+        "data":res
+        }

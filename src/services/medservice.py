@@ -31,7 +31,10 @@ def Vsearch(key):
         'Name': med_name,
         'Link': link})
     # print(df)
-    return {"data": df.to_dict(orient='records')}
+    return {
+        "status": html.status_code,
+        "data": df.to_dict(orient='records')
+        }
 
 
 def Hsearch(key):
@@ -59,7 +62,10 @@ def Hsearch(key):
         'Name': med_name,
         'Link': link})
     # print(df)
-    return {"data": df.to_dict(orient='records')}
+    return {
+        "status": html.status_code,
+        "data": df.to_dict(orient='records')
+        }
 
 # Vsearch("Pan")
 # Vsearch("s")
