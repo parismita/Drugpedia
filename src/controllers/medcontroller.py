@@ -17,4 +17,4 @@ def create():
 
 # insert data into table.
 def search(): 
-    return Vsearch("crocin")    
+    return Vsearch("Pan")    

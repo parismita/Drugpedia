@@ -16,9 +16,9 @@ autopep: setup
 
 #testing scrap util
 scrap: setup
-	autopep8 --in-place src/utils/scraping.py
-	flake8 src/utils/scraping.py
-	python3 src/utils/scraping.py
+	autopep8 --in-place src/services/medservice.py
+	flake8 src/services/medservice.py
+	python3 src/services/medservice.py
     
 setup: requirements.txt
 	pip3 install -r requirements.txt
