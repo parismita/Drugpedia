@@ -1,4 +1,4 @@
-from Drugpedia.src.models.ingredient import Ingredients
+from src.models.ingredient import Ingredients
 from flask import render_template, request, flash, Blueprint
 from src.models.ingredient import Ingredients
 from src.utils.initdb import db
