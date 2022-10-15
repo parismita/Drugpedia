@@ -1,7 +1,8 @@
 import requests
-import json
 from bs4 import BeautifulSoup as bs
 import pandas as pd
+
+# from db after scrapping and storing
 
 
 def Vsearch(key):
@@ -34,7 +35,7 @@ def Vsearch(key):
     return {
         "status": html.status_code,
         "data": df.to_dict(orient='records')
-        }
+    }
 
 
 def Hsearch(key):
@@ -65,8 +66,74 @@ def Hsearch(key):
     return {
         "status": html.status_code,
         "data": df.to_dict(orient='records')
-        }
+    }
 
 # Vsearch("Pan")
 # Vsearch("s")
 # Hsearch("crocin")
+
+
+# scrapped
+def OtcDetails(key):
+    # from db find the url of the key given
+    # if no url then do search to find and store the url
+    url = 'https://www.1mg.com/'+key
+    header = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; ' +
+              'Linux x86_64; rv:105.0) Gecko/20100101 Firefox/105.0' +
+              'AppleWebKit/537.36 (KHTML, like Gecko)' +
+              ' Chrome/104.0.0.0 Safari/537.36'
+              }
+    html = requests.get(url=url, headers=header)
+    # print(html.status_code)
+
+    soup = bs(html.content, 'html.parser')
+
+    med_desc = soup.find_all('div', {
+        'class': 'ProductDescription__description-content___A_qCZ'})[0]
+
+    print(med_desc)
+    return {
+        "status": html.status_code,
+        "data": med_desc
+    }
+
+
+def DrugDetails(key):
+    url = 'https://www.1mg.com/'+key
+    header = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; ' +
+              'Linux x86_64; rv:105.0) Gecko/20100101 Firefox/105.0' +
+              'AppleWebKit/537.36 (KHTML, like Gecko)' +
+              ' Chrome/104.0.0.0 Safari/537.36'
+              }
+    html = requests.get(url=url, headers=header)
+    # print(html.status_code)
+
+    soup = bs(html.content, 'html.parser')
+
+    med_desc = soup.find_all('div', {
+        'class': 'DrugOverview__content___22ZBX'})[0].text.strip()
+    # print(med_desc)
+
+    med_side = soup.find_all('div', {
+        'class': 'DrugOverview__list-container' +
+        '___2eAr6 DrugOverview__content___22ZBX'})[0].text.strip()
+    # print(med_side)
+
+    med_use = soup.find_all('div', {
+        'class': 'ShowMoreArray__tile___2mFZk'})[0].text.strip()
+    # print(med_use)
+
+    return {
+        "status": html.status_code,
+        "data": {
+            "description": med_desc,
+            "side_effects": med_side,
+            "usage": med_use
+        }
+    }
+
+
+"""OtcDetails("otc/digene-acidity-gas-relief-gel-mint-otc236576")
+DrugDetails("drugs/wikoryl-10-tablet-680587")
+DrugDetails("drugs/pan-40-tablet-325250")
+OtcDetails("otc/crocin-650-advance-tablet-otc638914")"""

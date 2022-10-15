@@ -19,6 +19,11 @@ scrap: setup
 	autopep8 --in-place src/services/medservice.py
 	flake8 src/services/medservice.py
 	python3 src/services/medservice.py
+
+ingscrap: setup
+	autopep8 --in-place src/services/ingservice.py
+	flake8 src/services/ingservice.py
+	python3 src/services/ingservice.py
     
 setup: requirements.txt
 	pip3 install -r requirements.txt
