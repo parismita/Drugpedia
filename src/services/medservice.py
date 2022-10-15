@@ -1,4 +1,5 @@
 import requests
+import json
 from bs4 import BeautifulSoup as bs
 import pandas as pd
 
@@ -38,6 +39,7 @@ def Vsearch(key):
     }
 
 
+
 def Hsearch(key):
     url = 'https://www.1mg.com/search/all?filter=true&name='+key
     header = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64)' +
@@ -67,6 +69,7 @@ def Hsearch(key):
         "status": html.status_code,
         "data": df.to_dict(orient='records')
     }
+
 
 # Vsearch("Pan")
 # Vsearch("s")
