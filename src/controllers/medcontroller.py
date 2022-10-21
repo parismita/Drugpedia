@@ -1,21 +1,17 @@
-import json
+from flask import request
 from src.models.medicine import Med
 from src.utils.initdb import db, create_db
-from src.services.medservice import Vsearch, Hsearch
-
-def index():
-    return {
-        'status': 'OK',
-        'code': 200,
-        'data': ''
-    }
-
+from src.services.medservice import Vsearch, Hsearch, OtcDetails, DrugDetails
 
 def create():
     create_db()
 
 
-# insert data into table.
 def search(): 
-    return Vsearch("Pan")    
+    # arguments ie key=pan for eg
+    key = request.args.get("key")
+    return Vsearch(key)    
 
+def details(): 
+    name = request.args.get("name")
+    return OtcDetails(name)

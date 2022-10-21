@@ -2,7 +2,7 @@ from src.models.ingredient import Ingredients
 from flask import render_template, request, flash, Blueprint
 from src.models.ingredient import Ingredients
 from src.utils.initdb import db
-from src.controllers.ingcontroller import index, search, create
+from src.controllers.ingcontroller import details, search, create
 
 ingredient = Blueprint('ingredient', __name__)
 
@@ -18,4 +18,5 @@ def ingredientadd():
 
 ingredient.route('/create', methods=['GET'])(create)
 ingredient.route('/search', methods=['GET'])(search)
+ingredient.route('/details', methods=['GET'])(details)
 
