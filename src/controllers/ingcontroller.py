@@ -1,7 +1,7 @@
 import json
 from src.models.ingredient import Ingredients
 from src.utils.initdb import db, create_db
-from src.services.ingservice import IngredientSearch, Search
+from src.services.ingservice import Details, Search
 from flask import request
 
 def index():
@@ -18,7 +18,7 @@ def create():
 
 # insert data into table.
 def details(): 
-    return IngredientSearch(request.args.get("name"))    
+    return Details(request.args.get("id"))    
 
 def search(): 
     return Search(request.args.get("key"))  
