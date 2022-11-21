@@ -14,5 +14,4 @@ def search():
 
 def details(): 
     id = request.args.get("id")
-    cat = request.args.get("cat")
-    return Details(cat, id)
+    return Details(id)
