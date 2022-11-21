@@ -44,33 +44,44 @@
 </head>
     <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-    <section class = "main-section">
-        <div class="container">
+    <script>
+        var search_results = JSON.parse('{{search_response|safe}}');
+        console.log(search_results);
+    </script>
+    <section class = "main-section">            
+        <div class="container p-5">
             <div class="row mt-4">
                 <div class="col-md-2"></div>
                 <div class="col-md-8" style="text-align: center;">
-                    <!-- <i class="fa-solid fa-pills fa-5x"></i> -->
-                    <!-- <i class="fa-solid fa-file-prescription"></i> -->
-                    <h1 style="font-family: 'Chakra Petch', sans-serif; font-size: 72pt; color: #101223;"><i class="fa-solid fa-file-prescription p-2"></i>Drugpedia</h1>
+                    <h2 class="mt-4" style="font-family: 'Chakra Petch', sans-serif;">Search results</h2>
                 </div>
                 <div class="col-md-2"></div>
               </div>
             <div class="row mt-4">
               <div class="col-md-2"></div>
-              <div class="col-md-8">
-                <form class="d-flex flex-row align-items-center" method="post">
-                      <input type="drug-search" autocomplete="off" class="form-control" placeholder="Search medication by brand name or main ingredient" id="drug-search" name="drug-search"> <!--aria-describedby="drugSearch"-->
-                      <button type="submit" class="btn btn-outline-dark"><i class="fa-solid fa-magnifying-glass fa-1x"></i></button>
-                </form>
+              <div class="col-md=8">
+                <ol>
+                    {% for medicine in search_response %}
+                        <li class="list-group">
+                            <a href="/" target="_blank" class="list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">{{ medicine['Name'] }}</h5>
+                                </div>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ol>
               </div>
               <div class="col-md-2"></div>
             </div>
         </div>
     </section>
-    <section class="footer-section">
+    <!-- <section class="footer-section">
         <footer class="py-3 p-4" style="background-color: #777986; text-align: center;">
             <span style="color: #f3f4f8;">© CS 699 Project, Autumn 2022</span>
         </footer>
-    </section>
+    </section> -->
 </body>
 </html>
+
+
