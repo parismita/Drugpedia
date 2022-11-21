@@ -27,6 +27,5 @@ class Medicine(db.Model):
             "ingredient":self.ingredient
         }
 
-
         
         

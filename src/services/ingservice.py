@@ -36,7 +36,13 @@ def Get(url):
     except Exception as e:
 	    print(str(e))
 
-def Details(key, name):
+def Details(key):
+    if(key=="" or key==None):
+        return {
+        "status": 404,
+        "data": None
+    }
+
     #from db
     data = Get(key)
     if(data):
@@ -87,6 +93,12 @@ def Details(key, name):
 
 
 def Search(key):
+    if(key=="" or key==None):
+        return {
+        "status": 404,
+        "data": None
+    }
+
     url = 'https://www.webmd.com/drugs/2/search?type=drugs&query='+key
     header = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; ' +
               'Linux x86_64; rv:105.0) Gecko/20100101 Firefox/105.0' +
