@@ -36,7 +36,7 @@ def Get(url):
     except Exception as e:
 	    print(str(e))
 
-def Details(key):
+def Details(key, name):
     if(key=="" or key==None):
         return {
         "status": 404,

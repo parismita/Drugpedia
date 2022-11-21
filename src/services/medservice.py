@@ -107,7 +107,7 @@ def Hsearch(content):
 # Vsearch("s")
 # Hsearch("crocin")
 
-def Details(id):
+def Details(id, name):
     if(id=="" or id==None):
         return {
         "status": 404,
