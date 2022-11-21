@@ -73,7 +73,7 @@ def Details(key, name):
     res = {}
     res["name"]=name
     res["url"]=key
-    for section, title in sections, section_name:
+    for section, title in zip(sections, section_name):
         container = soup.find("div", attrs={"class": section})
         monograph_content_headline = container.find(
             "div", attrs={"class": "title-bg"})
@@ -88,7 +88,8 @@ def Details(key, name):
 
     return {
         "status": source.status_code,
-        "data": res
+        "data": res,
+        "from": "webmd"
     }
 
 
