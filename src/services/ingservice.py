@@ -4,8 +4,8 @@ import pandas as pd
 
 
 def Details(key):
-    search_url = "https://www.webmd.com/drugs/2/" + \
-        "drug-17633/pantoprazole-oral/details"
+    search_url = "https://www.webmd.com" + key
+    
     headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; ' +
               'Linux x86_64; rv:105.0) Gecko/20100101 Firefox/105.0' +
               'AppleWebKit/537.36 (KHTML, like Gecko)' +

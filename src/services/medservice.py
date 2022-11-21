@@ -1,5 +1,5 @@
 import requests
-import json
+import json, re
 from bs4 import BeautifulSoup as bs
 import pandas as pd
 
@@ -68,8 +68,8 @@ def Hsearch(content):
 # Vsearch("s")
 # Hsearch("crocin")
 
-def Details(cat, id):
-    url = 'https://www.1mg.com/'+cat+"/"+id
+def Details(id):
+    url = 'https://www.1mg.com'+id
     header = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; ' +
               'Linux x86_64; rv:105.0) Gecko/20100101 Firefox/105.0' +
               'AppleWebKit/537.36 (KHTML, like Gecko)' +
@@ -79,7 +79,8 @@ def Details(cat, id):
     # print(html.status_code)
 
     content = bs(html.content, 'html.parser')
-    
+    cat = id.split("/")[1]
+
     if(cat=="otc"):
         med_desc, med_side, med_use, med_ing = OtcDetails(content)
     if(cat=="drugs"):
@@ -103,14 +104,15 @@ def OtcDetails(content):
 
     med_desc = content.find_all('div', {
         'class': 'ProductDescription__description-content___A_qCZ'})
-    #med_desc = med_desc['ul']
+
     med_ing = med_desc[0].find('ul').get_text()
 
     med_side=med_desc[0].find_all('ul')[1].get_text()
     med_use = med_desc[0].find_all('ul')[2].get_text()
 
-    #print(med_desc)
-    return str("med_desc"), med_side, med_use, med_ing
+    med_desc = str(med_desc[0]).split("<p>")[0]
+    med_desc = bs(med_desc, 'html.parser').get_text()
+    return med_desc, med_side, med_use, med_ing
 
 
 def DrugDetails(content):
