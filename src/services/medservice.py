@@ -81,9 +81,9 @@ def Details(cat, id):
     content = bs(html.content, 'html.parser')
     
     if(cat=="otc"):
-        med_desc, med_side, med_use = OtcDetails(content)
+        med_desc, med_side, med_use, med_ing = OtcDetails(content)
     if(cat=="drugs"):
-        med_desc, med_side, med_use = DrugDetails(content)
+        med_desc, med_side, med_use, med_ing = DrugDetails(content)
 
 
     return {
@@ -91,7 +91,8 @@ def Details(cat, id):
         "data": {
             "description": med_desc,
             "side_effects": med_side,
-            "usage": med_use
+            "usage": med_use,
+            "ingredient": med_ing
         }
     }
 
@@ -101,15 +102,15 @@ def OtcDetails(content):
     # if no url then do search to find and store the url
 
     med_desc = content.find_all('div', {
-        'class': 'ProductDescription__description-content___A_qCZ'})[0]
+        'class': 'ProductDescription__description-content___A_qCZ'})
+    #med_desc = med_desc['ul']
+    med_ing = med_desc[0].find('ul').get_text()
 
-    med_side=content.find_all('div', {
-        'class': 'ProductDescription__description-content___A_qCZ'})[0]
-    med_use = content.find_all('div', {
-        'class': 'ProductDescription__description-content___A_qCZ'})[0]
+    med_side=med_desc[0].find_all('ul')[1].get_text()
+    med_use = med_desc[0].find_all('ul')[2].get_text()
 
     #print(med_desc)
-    return str(med_desc), str(med_desc), str(med_desc)
+    return str("med_desc"), med_side, med_use, med_ing
 
 
 def DrugDetails(content):
@@ -126,8 +127,10 @@ def DrugDetails(content):
     med_use = content.find_all('div', {
         'class': 'ShowMoreArray__tile___2mFZk'})[0].text.strip()
     # print(med_use)
+    med_ing = content.find_all('div', {
+        'class': 'saltInfo DrugHeader__meta-value___vqYM0'})[0].text.strip()
 
-    return med_desc, med_side, med_use
+    return med_desc, med_side, med_use, med_ing
 
 
 """OtcDetails("otc/digene-acidity-gas-relief-gel-mint-otc236576")
