@@ -1,7 +1,7 @@
 from flask import request
 from src.models.medicine import Med
 from src.utils.initdb import db, create_db
-from src.services.medservice import Vsearch, Hsearch, OtcDetails, DrugDetails
+from src.services.medservice import Search, Details
 
 def create():
     create_db()
@@ -10,8 +10,9 @@ def create():
 def search(): 
     # arguments ie key=pan for eg
     key = request.args.get("key")
-    return Vsearch(key)    
+    return Search(key)    
 
 def details(): 
-    name = request.args.get("name")
-    return OtcDetails(name)
+    id = request.args.get("id")
+    cat = request.args.get("cat")
+    return Details(cat, id)

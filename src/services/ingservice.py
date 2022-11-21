@@ -3,12 +3,14 @@ from bs4 import BeautifulSoup as bs
 import pandas as pd
 
 
-def IngredientSearch(key):
+def Details(key):
     search_url = "https://www.webmd.com/drugs/2/" + \
         "drug-17633/pantoprazole-oral/details"
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 6.1;' +
-        ' WOW64; rv:50.0) Gecko/20100101 Firefox/50.0'}
+    headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; ' +
+              'Linux x86_64; rv:105.0) Gecko/20100101 Firefox/105.0' +
+              'AppleWebKit/537.36 (KHTML, like Gecko)' +
+              ' Chrome/104.0.0.0 Safari/537.36'
+              }
     source = requests.get(search_url, headers=headers)
     soup = bs(source.content, 'html.parser')
 
