@@ -10,7 +10,9 @@ def create():
 
 # insert data into table.
 def details(): 
-    return Details(request.args.get("id"))    
+    id = request.args.get("id")
+    name = request.args.get("name")
+    return Details(id, name)    
 
 def search(): 
     return Search(request.args.get("key"))  

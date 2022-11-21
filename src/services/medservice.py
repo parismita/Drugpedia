@@ -1,35 +1,41 @@
 import requests
-import json, re
 from bs4 import BeautifulSoup as bs
 import pandas as pd
 from src.utils.initdb import db
 from src.models.medicine import Medicine
 
-#db todo: CRUD med, ing
 def Insert(data):
     #post
-    #find data.url if not present insert else update;
-    entry = Medicine(
-        name=data["name"], 
-        description=data["description"], 
-        url=data["url"], 
-        use=data["use"], 
-        side_effect=data["side_effect"])
-    db.session.add(entry)
-    db.session.commit()
+    try:
+        entry = Medicine(
+            name=data["name"], 
+            description=data["description"], 
+            url=data["url"], 
+            use=data["usage"], 
+            side_effect=data["side_effect"],
+            ingredient=data["ingredient"])
+        db.session.add(entry)
+        db.session.commit()
+    except Exception as e:
+	    print(str(e))
 
-    #return get data
-    return data
 
-def Delete(data):
+def Delete(url):
+    try:
+        Medicine.query.filter_by(url=url).delete()
+        db.session.commit()
+    except Exception as e:
+	    print(str(e))
 
-    #return get data
-    return data
+def Get(url):
+    try:
+        res = Medicine.query.filter_by(url=url).first()
+        if(not res):
+            return
+        return res.json()
+    except Exception as e:
+	    print(str(e))
 
-def Get(data):
-    
-    #return get data
-    return data
 
 # from db after scrapping and storing
 def Search(key):
@@ -101,13 +107,23 @@ def Hsearch(content):
 # Vsearch("s")
 # Hsearch("crocin")
 
-def Details(id):
+def Details(id, name):
     if(id=="" or id==None):
         return {
         "status": 404,
         "data": None
     }
 
+    #from db
+    data = Get(id)
+    if(data):
+        return {
+            "status": 200,
+            "data": data, 
+            "from": "postgres"
+        }
+    
+    #scrap
     url = 'https://www.1mg.com'+id
     header = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; ' +
               'Linux x86_64; rv:105.0) Gecko/20100101 Firefox/105.0' +
@@ -126,15 +142,22 @@ def Details(id):
         med_desc, med_side, med_use, med_ing = DrugDetails(content)
 
 
-    return {
+    response =  {
         "status": html.status_code,
         "data": {
             "description": med_desc,
-            "side_effects": med_side,
+            "side_effect": med_side,
             "usage": med_use,
-            "ingredient": med_ing
-        }
+            "ingredient": med_ing,
+            "name": name,
+            "url": id
+        },
+        "from": "1mg"
     }
+
+    #insert when not in db
+    Insert(response['data'])
+    return response
 
 # scrapped
 def OtcDetails(content):

@@ -14,5 +14,14 @@ class Ingredients(db.Model):
         self.url = url
         self.use = use
         self.side_effect = side_effect
+    
+    def json(self):
+        return {
+            "name":self.name,
+            "precautions":self.precautions,
+            "url":self.url,
+            "use":self.use,
+            "side_effect":self.side_effect
+        }
 
 

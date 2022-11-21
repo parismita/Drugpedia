@@ -5,5 +5,5 @@ ingredient = Blueprint('ingredient', __name__)
 
 ingredient.route('/create', methods=['GET'])(create)
 ingredient.route('/search', methods=['GET'])(search)
-ingredient.route('/details', methods=['GET'])(details)
+ingredient.route('/details', methods=['GET', 'POST'])(details)
 
