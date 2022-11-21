@@ -21,4 +21,6 @@ def search_results():
     # print()
     search_response = Search(session.get('drug_search'))
     search_response = search_response['data']
+    if(not search_response):
+        return redirect(url_for('index'))
     return render_template('search-results.html', search_response = search_response)

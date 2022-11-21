@@ -31,6 +31,12 @@ def Get(data):
     return data
 
 def Details(key):
+    if(key=="" or key==None):
+        return {
+        "status": 404,
+        "data": None
+    }
+    
     search_url = "https://www.webmd.com" + key
     
     headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; ' +
@@ -66,6 +72,12 @@ def Details(key):
 
 
 def Search(key):
+    if(key=="" or key==None):
+        return {
+        "status": 404,
+        "data": None
+    }
+
     url = 'https://www.webmd.com/drugs/2/search?type=drugs&query='+key
     header = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; ' +
               'Linux x86_64; rv:105.0) Gecko/20100101 Firefox/105.0' +

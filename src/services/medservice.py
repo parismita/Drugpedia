@@ -33,6 +33,12 @@ def Get(data):
 
 # from db after scrapping and storing
 def Search(key):
+    if(key=="" or key==None):
+        return {
+        "status": 404,
+        "data": None
+    }
+
     url = 'https://www.1mg.com/search/all?filter=true&name='+key
     header = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; ' +
               'Linux x86_64; rv:105.0) Gecko/20100101 Firefox/105.0' +
@@ -96,6 +102,12 @@ def Hsearch(content):
 # Hsearch("crocin")
 
 def Details(id):
+    if(id=="" or id==None):
+        return {
+        "status": 404,
+        "data": None
+    }
+
     url = 'https://www.1mg.com'+id
     header = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; ' +
               'Linux x86_64; rv:105.0) Gecko/20100101 Firefox/105.0' +
