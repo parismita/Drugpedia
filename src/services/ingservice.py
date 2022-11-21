@@ -1,9 +1,42 @@
 import requests
 from bs4 import BeautifulSoup as bs
 import pandas as pd
+from src.utils.initdb import db
+from src.models.ingredient import Ingredients
 
+#db todo: CRUD med, ing
+def Insert(data):
+    #post
+    #find data.url if not present insert else update;
+    entry = Ingredients(
+        name=data["name"], 
+        precautions=data["precautions"], 
+        url=data["url"], 
+        use=data["use"], 
+        side_effect=data["side_effect"])
+    db.session.add(entry)
+    db.session.commit()
+
+    #return get data
+    return data
+
+def Delete(data):
+
+    #return get data
+    return data
+
+def Get(data):
+    
+    #return get data
+    return data
 
 def Details(key):
+    if(key=="" or key==None):
+        return {
+        "status": 404,
+        "data": None
+    }
+    
     search_url = "https://www.webmd.com" + key
     
     headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; ' +
@@ -39,6 +72,12 @@ def Details(key):
 
 
 def Search(key):
+    if(key=="" or key==None):
+        return {
+        "status": 404,
+        "data": None
+    }
+
     url = 'https://www.webmd.com/drugs/2/search?type=drugs&query='+key
     header = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; ' +
               'Linux x86_64; rv:105.0) Gecko/20100101 Firefox/105.0' +

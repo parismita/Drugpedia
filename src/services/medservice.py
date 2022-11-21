@@ -2,10 +2,43 @@ import requests
 import json, re
 from bs4 import BeautifulSoup as bs
 import pandas as pd
+from src.utils.initdb import db
+from src.models.medicine import Medicine
+
+#db todo: CRUD med, ing
+def Insert(data):
+    #post
+    #find data.url if not present insert else update;
+    entry = Medicine(
+        name=data["name"], 
+        description=data["description"], 
+        url=data["url"], 
+        use=data["use"], 
+        side_effect=data["side_effect"])
+    db.session.add(entry)
+    db.session.commit()
+
+    #return get data
+    return data
+
+def Delete(data):
+
+    #return get data
+    return data
+
+def Get(data):
+    
+    #return get data
+    return data
 
 # from db after scrapping and storing
-
 def Search(key):
+    if(key=="" or key==None):
+        return {
+        "status": 404,
+        "data": None
+    }
+
     url = 'https://www.1mg.com/search/all?filter=true&name='+key
     header = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; ' +
               'Linux x86_64; rv:105.0) Gecko/20100101 Firefox/105.0' +
@@ -69,6 +102,12 @@ def Hsearch(content):
 # Hsearch("crocin")
 
 def Details(id):
+    if(id=="" or id==None):
+        return {
+        "status": 404,
+        "data": None
+    }
+
     url = 'https://www.1mg.com'+id
     header = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; ' +
               'Linux x86_64; rv:105.0) Gecko/20100101 Firefox/105.0' +

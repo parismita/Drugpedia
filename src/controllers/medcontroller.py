@@ -1,5 +1,5 @@
 from flask import request
-from src.models.medicine import Med
+from src.models.medicine import Medicine
 from src.utils.initdb import db, create_db
 from src.services.medservice import Search, Details
 

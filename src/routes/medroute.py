@@ -1,6 +1,4 @@
 from flask import render_template, request, flash, Blueprint
-from src.models.medicine import Med
-from src.utils.initdb import db
 from src.controllers.medcontroller import search, create, details
 
 med = Blueprint('med', __name__)
