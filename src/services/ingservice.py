@@ -4,6 +4,31 @@ import pandas as pd
 from src.utils.initdb import db
 from src.models.ingredient import Ingredients
 
+#db todo: CRUD med, ing
+def Insert(data):
+    #post
+    #find data.url if not present insert else update;
+    entry = Ingredients(
+        name=data["name"], 
+        precautions=data["precautions"], 
+        url=data["url"], 
+        use=data["use"], 
+        side_effect=data["side_effect"])
+    db.session.add(entry)
+    db.session.commit()
+
+    #return get data
+    return data
+
+def Delete(data):
+
+    #return get data
+    return data
+
+def Get(data):
+    
+    #return get data
+    return data
 
 def Details(key):
     search_url = "https://www.webmd.com" + key

@@ -6,15 +6,33 @@ from src.utils.initdb import db
 from src.models.medicine import Medicine
 
 #db todo: CRUD med, ing
+def Insert(data):
+    #post
+    #find data.url if not present insert else update;
+    entry = Medicine(
+        name=data["name"], 
+        description=data["description"], 
+        url=data["url"], 
+        use=data["use"], 
+        side_effect=data["side_effect"])
+    db.session.add(entry)
+    db.session.commit()
 
+    #return get data
+    return data
+
+def Delete(data):
+
+    #return get data
+    return data
+
+def Get(data):
+    
+    #return get data
+    return data
 
 # from db after scrapping and storing
 def Search(key):
-    entry = Medicine(name="pan", description="ac", url="bc", use="cc", side_effect="dc")
-    db.session.add(entry)
-    db.session.commit()
-    print(entry)
-
     url = 'https://www.1mg.com/search/all?filter=true&name='+key
     header = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; ' +
               'Linux x86_64; rv:105.0) Gecko/20100101 Firefox/105.0' +
