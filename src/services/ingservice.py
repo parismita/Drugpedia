@@ -1,6 +1,8 @@
 import requests
 from bs4 import BeautifulSoup as bs
 import pandas as pd
+from src.utils.initdb import db
+from src.models.ingredient import Ingredients
 
 
 def Details(key):

@@ -2,10 +2,19 @@ import requests
 import json, re
 from bs4 import BeautifulSoup as bs
 import pandas as pd
+from src.utils.initdb import db
+from src.models.medicine import Medicine
+
+#db todo: CRUD med, ing
+
 
 # from db after scrapping and storing
-
 def Search(key):
+    entry = Medicine(name="pan", description="ac", url="bc", use="cc", side_effect="dc")
+    db.session.add(entry)
+    db.session.commit()
+    print(entry)
+
     url = 'https://www.1mg.com/search/all?filter=true&name='+key
     header = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; ' +
               'Linux x86_64; rv:105.0) Gecko/20100101 Firefox/105.0' +
