@@ -63,6 +63,10 @@ def IngredientDetails(key, name):
     soup = bs(source.content, 'html.parser')
 
     drug_header = soup.find("h1", attrs={"class": "drug-name"})
+    if(not drug_header):
+        return {
+        "status": 404,
+        "data": None}
     drug_name = drug_header.get_text()
     print(drug_name)
 
