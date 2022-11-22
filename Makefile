@@ -17,7 +17,7 @@ lint: setup autopep
 	flake8 src/utils/*.py
 	
 autopep: setup
-	autopep8 --in-place *.py
+	autopep8 --in-place main.py setup.py
 	autopep8 --in-place --recursive src/services
 	autopep8 --in-place --recursive src/controllers
 	autopep8 --in-place --recursive src/models
