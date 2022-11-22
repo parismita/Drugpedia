@@ -30,7 +30,7 @@ def none_check(str, default):
 
 def create_app():
     app = Flask(__name__, template_folder='src/templates')
-    uri = none_check(USER, "postgresql")+":" + \
+    uri = none_check(USER, "postgres")+":" + \
         none_check(PASS, "") + "@" + \
         none_check(HOST, "localhost") + "/" + \
         none_check(DB, "drugpedia")

@@ -9,15 +9,15 @@ test: setup
 
 #not all files are getting checked - bug
 lint: setup autopep
-	flake8 *.py
-	flake8 src/services/*.py
-	flake8 src/controllers/*.py
-	flake8 src/models/*.py
-	flake8 src/routes/*.py
-	flake8 src/utils/*.py
+	flake8 main.py setup.py
+	flake8 src/services
+	flake8 src/controllers
+	flake8 src/models
+	flake8 src/routes
+	flake8 src/utils
 	
 autopep: setup
-	autopep8 --in-place *.py
+	autopep8 --in-place main.py setup.py
 	autopep8 --in-place --recursive src/services
 	autopep8 --in-place --recursive src/controllers
 	autopep8 --in-place --recursive src/models
