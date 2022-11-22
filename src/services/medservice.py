@@ -4,6 +4,14 @@ import pandas as pd
 from src.utils.initdb import db
 from src.models.medicine import Medicine
 
+#404 response
+def NullData():
+    return {
+        "status": 404,
+        "data": None
+    }
+
+#insert into postgres - medicine   
 def Insert(data):
     #post
     try:
@@ -19,7 +27,7 @@ def Insert(data):
     except Exception as e:
 	    print(str(e))
 
-
+#delete from medicine
 def Delete(url):
     try:
         Medicine.query.filter_by(url=url).delete()
@@ -27,6 +35,7 @@ def Delete(url):
     except Exception as e:
 	    print(str(e))
 
+#select by filter id from medicine
 def Get(url):
     try:
         res = Medicine.query.filter_by(url=url).first()
@@ -102,17 +111,9 @@ def Hsearch(content):
     # print(df)
     return df
 
-
-# Vsearch("Pan")
-# Vsearch("s")
-# Hsearch("crocin")
-
 def MedDetails(id, name):
     if(id=="" or id==None):
-        return {
-        "status": 404,
-        "data": None
-    }
+        return NullData()
 
     #from db
     data = Get(id)
@@ -131,12 +132,14 @@ def MedDetails(id, name):
               ' Chrome/104.0.0.0 Safari/537.36'
               }
     html = requests.get(url=url, headers=header)
-    # print(html.status_code)
 
     content = bs(html.content, 'html.parser')
     cat = id.split("/")[1]
 
+    #initialize
     med_desc = None; med_side = None; med_use = None; med_ing = None
+
+    #send to respective module based on if its otc or drug
     if(cat=="otc"):
         med_desc = OtcDetails(content)
     if(cat=="drugs"):
@@ -162,7 +165,7 @@ def MedDetails(id, name):
 
 #data should be bsoup html data, return value string
 def spacing(data):
-    #no seperate classes or id found hence putting everythihng in description
+    #newline on break
     data = str(data) \
                 .replace("<br/>","\n") \
                 .replace("<br>", "\n") 
@@ -176,36 +179,41 @@ def spacing(data):
 
 # scrapped
 def OtcDetails(content):
-    # from db find the url of the key given
-    # if no url then do search to find and store the url
-
+    #no seperate classes or id found hence putting everythihng in description
     med_desc = content.find_all('div', {
         'class': 'ProductDescription__description-content___A_qCZ'})
     
-    med_desc = str(med_desc[0]) \
-                .replace("<br/>","\n") \
-                .replace("<br>", "\n") 
-
+    #none check
+    if((not med_desc) or (not med_desc[0])):
+        return NullData()
+    
+    #check spacing and get all data together as one string
     med_desc = spacing(med_desc[0]).get_text()
     med_desc = re.sub("\t+", " ", med_desc)
     return med_desc
 
 
 def DrugDetails(content):
-
+    #content spacing check and formatting
     content = spacing(content)
+
+    #medicine description
     med_desc = content.find_all('div', {
         'class': 'DrugOverview__content___22ZBX'})[0].get_text()
     # print(med_desc)
 
+    #medicine side effects
     med_side = content.find_all('div', {
         'class': 'DrugOverview__list-container' +
         '___2eAr6 DrugOverview__content___22ZBX'})[0].get_text()
     # print(med_side)
 
+    #medicine usage
     med_use = content.find_all('div', {
         'class': 'ShowMoreArray__tile___2mFZk'})[0].get_text()
     # print(med_use)
+
+    #medicine ingredients
     med_ing = content.find_all('div', {
         'class': 'saltInfo DrugHeader__meta-value___vqYM0'})[0].get_text()
 
@@ -215,4 +223,8 @@ def DrugDetails(content):
 """OtcDetails("otc/digene-acidity-gas-relief-gel-mint-otc236576")
 DrugDetails("drugs/wikoryl-10-tablet-680587")
 DrugDetails("drugs/pan-40-tablet-325250")
-OtcDetails("otc/crocin-650-advance-tablet-otc638914")"""
+OtcDetails("otc/crocin-650-advance-tablet-otc638914")
+Vsearch("Pan")
+Vsearch("s")
+Hsearch("crocin")
+"""

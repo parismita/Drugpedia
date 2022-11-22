@@ -10,7 +10,8 @@ def NullData():
         "data": None
     }
     
-#db todo: CRUD med, ing
+
+#insert into ingredient
 def Insert(data):
     #post
     try:
@@ -25,7 +26,7 @@ def Insert(data):
     except Exception as e:
 	    print(str(e))
 
-
+#delete from ingredient
 def Delete(url):
     try:
         Ingredients.query.filter_by(url=url).delete()
@@ -33,6 +34,7 @@ def Delete(url):
     except Exception as e:
 	    print(str(e))
 
+#get by filter, from ingredient
 def Get(url):
     try:
         res = Ingredients.query.filter_by(url=url).first()
@@ -42,12 +44,10 @@ def Get(url):
     except Exception as e:
 	    print(str(e))
 
+#the details of ingredient
 def IngredientDetails(key, name):
     if(key=="" or key==None):
-        return {
-        "status": 404,
-        "data": None
-    }
+        return NullData()
 
     #from db
     data = Get(key)
@@ -57,6 +57,7 @@ def IngredientDetails(key, name):
             "data": data, 
             "from": "postgres"
         }
+
     #scrap
     search_url = "https://www.webmd.com" + key
     
@@ -70,26 +71,20 @@ def IngredientDetails(key, name):
 
     drug_header = soup.find("h1", attrs={"class": "drug-name"})
     if(not drug_header):
-        return {
-        "status": 404,
-        "data": None}
-    drug_name = drug_header.get_text()
-    print(drug_name)
+        return NullData()
 
     sections = ['uses-container',
                 'side-effects-container', 'precautions-container']
     section_name = ['use', 'side_effect', 'precautions']
 
+    #loop through the sections to get use, side effect, precaution
     res = {}
     res["name"]=name
     res["url"]=key
     for section, title in zip(sections, section_name):
         container = soup.find("div", attrs={"class": section})
-        monograph_content_headline = container.find(
-            "div", attrs={"class": "title-bg"})
         monograph_content = container.find(
             "div", attrs={"class": "monograph-content"})
-        #title = monograph_content_headline.get_text(strip=True)
         description = monograph_content.get_text()
         res[title] = description
 
@@ -102,6 +97,8 @@ def IngredientDetails(key, name):
         "from": "webmd"
     }
 
+
+#search for ingredients
 def IngredientSearch(key):
     if(key=="" or key==None):
         return NullData()
@@ -113,28 +110,36 @@ def IngredientSearch(key):
               ' Chrome/104.0.0.0 Safari/537.36'
               }
     html = requests.get(url=url, headers=header)
-    # print(html.status_code)
 
     soup = bs(html.content, 'html.parser')
 
+    #scraping
     ing_name = []
     link = []
-    for div in soup.find_all('div', {
-            'class': 'drugs-exact-search-list'}):
+
+    #finding the exact matching 
+    exact = soup.find('div', {
+            'class': 'drugs-exact-search-list'})
+    exact = exact.find_all('li')
+    for div in exact:
         link.append(div.a['href'])
         ing_name.append(div.a.text.strip())
         print(div.a.text.strip()+"\n")
 
-    for div in soup.find_all('div', {
-            'class': 'drugs-partial-search-list'}):
+    #finding partial matchings
+    partial = soup.find('div', {
+            'class': 'drugs-partial-search-list'})
+    partial = partial.find_all('li')
+    for div in partial:
         if (div.a['href'] not in link):
             link.append(div.a['href'])
             ing_name.append(div.a.text.strip())
 
+    #making it into dataframe
     df = pd.DataFrame({
         'Name': ing_name,
         'Link': link})
-    print(df)
+    
     return {
         "status": html.status_code,
         "data": df.to_dict(orient='records')

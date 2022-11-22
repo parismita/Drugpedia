@@ -1,10 +1,8 @@
-from flask import render_template, request, flash, Blueprint
-from src.controllers.medcontroller import search, create, medicine_details, search_results
+from flask import Blueprint
+from src.controllers.medcontroller import medicine_details, search_results
 
 med = Blueprint('medicine', __name__)
 
-med.route('/create', methods=['GET'])(create)
-med.route('/search', methods=['GET'])(search)
 med.route('/details', methods=['GET', 'POST'])(medicine_details)
 med.route("/search-results", methods=['POST', 'GET'])(search_results)
 
