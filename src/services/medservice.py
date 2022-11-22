@@ -38,7 +38,7 @@ def Get(url):
 
 
 # from db after scrapping and storing
-def Search(key):
+def MedSearch(key):
     if(key=="" or key==None):
         return {
         "status": 404,
@@ -107,7 +107,7 @@ def Hsearch(content):
 # Vsearch("s")
 # Hsearch("crocin")
 
-def Details(id, name):
+def MedDetails(id, name):
     if(id=="" or id==None):
         return {
         "status": 404,
