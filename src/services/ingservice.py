@@ -36,7 +36,7 @@ def Get(url):
     except Exception as e:
 	    print(str(e))
 
-def Details(key, name):
+def IngredientDetails(key, name):
     if(key=="" or key==None):
         return {
         "status": 404,
@@ -63,6 +63,10 @@ def Details(key, name):
     soup = bs(source.content, 'html.parser')
 
     drug_header = soup.find("h1", attrs={"class": "drug-name"})
+    if(not drug_header):
+        return {
+        "status": 404,
+        "data": None}
     drug_name = drug_header.get_text()
     print(drug_name)
 
@@ -93,7 +97,7 @@ def Details(key, name):
     }
 
 
-def Search(key):
+def IngredientSearch(key):
     if(key=="" or key==None):
         return {
         "status": 404,

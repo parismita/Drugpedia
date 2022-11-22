@@ -38,7 +38,7 @@ def Get(url):
 
 
 # from db after scrapping and storing
-def Search(key):
+def MedSearch(key):
     if(key=="" or key==None):
         return {
         "status": 404,
@@ -107,7 +107,7 @@ def Hsearch(content):
 # Vsearch("s")
 # Hsearch("crocin")
 
-def Details(id, name):
+def MedDetails(id, name):
     if(id=="" or id==None):
         return {
         "status": 404,
@@ -136,8 +136,9 @@ def Details(id, name):
     content = bs(html.content, 'html.parser')
     cat = id.split("/")[1]
 
+    med_desc = None; med_side = None; med_use = None; med_ing = None
     if(cat=="otc"):
-        med_desc, med_side, med_use, med_ing = OtcDetails(content)
+        med_desc = OtcDetails(content)
     if(cat=="drugs"):
         med_desc, med_side, med_use, med_ing = DrugDetails(content)
 
@@ -166,15 +167,13 @@ def OtcDetails(content):
 
     med_desc = content.find_all('div', {
         'class': 'ProductDescription__description-content___A_qCZ'})
+    
+    med_desc = str(med_desc[0]) \
+                .replace("<br/>","\n") \
+                .replace("<br>", "\n") 
 
-    med_ing = med_desc[0].find('ul').get_text()
-
-    med_side=med_desc[0].find_all('ul')[1].get_text()
-    med_use = med_desc[0].find_all('ul')[2].get_text()
-
-    med_desc = str(med_desc[0]).split("<p>")[0]
     med_desc = bs(med_desc, 'html.parser').get_text()
-    return med_desc, med_side, med_use, med_ing
+    return med_desc
 
 
 def DrugDetails(content):
