@@ -39,6 +39,7 @@ ingscrap: setup
     
 setup: requirements.txt
 	pip3 install -r requirements.txt
+	touch .env
     
 .PHONY: clean
 
