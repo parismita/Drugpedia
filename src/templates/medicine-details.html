@@ -44,49 +44,37 @@
 </head>
     <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <script>
+        var search_results = JSON.parse('{{search_response|safe}}');
+        console.log(search_results);
+    </script>
     <section class = "main-section">            
         <div class="container p-5">
             <div class="row mt-4">
                 <div class="col-md-2"></div>
                 <div class="col-md-8" style="text-align: center;">
-                    <h2 class="mt-4" style="font-family: 'Chakra Petch', sans-serif;">Search results</h2>
+                    <h2 class="mt-4" style="font-family: 'Chakra Petch', sans-serif;">{{ name }}</h2>
                 </div>
                 <div class="col-md-2"></div>
               </div>
-              <div class="row mt-4">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    <form class="d-flex flex-row align-items-center" method="post">
-                        <input type="medicine-search" autocomplete="off" class="form-control" placeholder="Search exact match" id="drug-search" name="medicine-name"> <!--aria-describedby="drugSearch"-->
-                        <button type="submit" class="btn btn-outline-dark"><i class="fa-solid fa-magnifying-glass fa-1x"></i></button>
-                  </form>
-                </div>
-                <div class="col-md-4"></div>
-              </div>
             <div class="row mt-4">
               <div class="col-md-2"></div>
-              <div class="col-md-8">
-                <ol>
-                    {% for medicine in search_response %}
-                        <li class="list-group">
-                            <a class="list-group-item list-group-item-action">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">{{ medicine['Name'] }}</h5>
-                                </div>
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ol>
+              <div class="col-md=8">
+                <p>Description</p>
+                <p id="desc" style="text-align: justify; font-size: 11pt;">{{ medicine_details_response['description'] }}</p>
+                <p class="mt-5">Composition</p>
+                <p id="desc" style="text-align: justify; font-size: 11pt;">{{ medicine_details_response['ingredient'] }}</p>
+                <p class="mt-5">Side effects</p>
+                <p id="desc" style="text-align: justify; font-size: 11pt;">{{ medicine_details_response['side_effect'] }}</p>
               </div>
-              <div class="col-md-2">
-              </div>
+              <div class="col-md-2"></div>
             </div>
         </div>
     </section>
-    <!-- <section class="footer-section">
+    <section class="footer-section">
         <footer class="py-3 p-4" style="background-color: #777986; text-align: center;">
             <span style="color: #f3f4f8;">© CS 699 Project, Autumn 2022</span>
         </footer>
-    </section> -->
+    </section>
 </body>
 </html>
