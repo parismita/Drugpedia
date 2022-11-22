@@ -1,5 +1,6 @@
 from src.utils.initdb import db
 
+
 class Medicine(db.Model):
     name = db.Column(db.String(1200), unique=True, nullable=False)
     description = db.Column(db.String(1200), nullable=False)
@@ -15,17 +16,14 @@ class Medicine(db.Model):
         self.url = url
         self.use = use
         self.side_effect = side_effect
-        self.ingredient = ingredient 
+        self.ingredient = ingredient
 
     def json(self):
         return {
-            "name":self.name,
-            "description":self.description,
-            "url":self.url,
-            "use":self.use,
-            "side_effect":self.side_effect,
-            "ingredient":self.ingredient
+            "name": self.name,
+            "description": self.description,
+            "url": self.url,
+            "use": self.use,
+            "side_effect": self.side_effect,
+            "ingredient": self.ingredient
         }
-
-        
-        

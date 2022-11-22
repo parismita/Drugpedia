@@ -1,7 +1,4 @@
-from flask import render_template, request, Blueprint, redirect, url_for, session
-from src.models.ingredient import Ingredients
-from src.utils.initdb import db, create_db
-from src.services.ingservice import IngredientDetails, IngredientSearch
+from flask import render_template, request, redirect, url_for, session
 
 
 def index():
