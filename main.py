@@ -47,7 +47,7 @@ def create_app():
 app = create_app()
 
 # all blurprints here
-app.register_blueprint(med, url_prefix='/med')
+app.register_blueprint(med, url_prefix='/medicine')
 app.register_blueprint(home, url_prefix='/')
 app.register_blueprint(ingredient, url_prefix='/ingredient')
 

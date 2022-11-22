@@ -4,6 +4,12 @@ import pandas as pd
 from src.utils.initdb import db
 from src.models.ingredient import Ingredients
 
+def NullData():
+    return {
+        "status": 404,
+        "data": None
+    }
+    
 #db todo: CRUD med, ing
 def Insert(data):
     #post
@@ -96,13 +102,9 @@ def IngredientDetails(key, name):
         "from": "webmd"
     }
 
-
 def IngredientSearch(key):
     if(key=="" or key==None):
-        return {
-        "status": 404,
-        "data": None
-    }
+        return NullData()
 
     url = 'https://www.webmd.com/drugs/2/search?type=drugs&query='+key
     header = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; ' +
@@ -121,6 +123,7 @@ def IngredientSearch(key):
             'class': 'drugs-exact-search-list'}):
         link.append(div.a['href'])
         ing_name.append(div.a.text.strip())
+        print(div.a.text.strip()+"\n")
 
     for div in soup.find_all('div', {
             'class': 'drugs-partial-search-list'}):
