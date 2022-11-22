@@ -4,13 +4,13 @@ import pandas as pd
 from src.utils.initdb import db
 from src.models.ingredient import Ingredients
 
-#404
 def NullData():
     return {
         "status": 404,
         "data": None
     }
     
+
 #insert into ingredient
 def Insert(data):
     #post
@@ -96,6 +96,7 @@ def IngredientDetails(key, name):
         "data": res,
         "from": "webmd"
     }
+
 
 #search for ingredients
 def IngredientSearch(key):
