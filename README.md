@@ -8,7 +8,7 @@
 This project is developed by Parismita Das (22M0815) and Vaibhav Singh (22M0827). Our aim is to implement a platform where a user can find all the details related to the prescribed medicine and its ingredient compositions and their potential roles. This project is starting off as an assignment to the course CS699 Software Lab, guided by Prof. Bhaskar Raman, from Indian Institute of Technology, Bombay. 
 
 
-Note: The project report and proposal for this project is inside documentation folder
+Note: The project report and proposal for this project is inside [documentation](https://github.com/parismita/Drugpedia/blob/main/documentation/report.pdf) folder
 
 
 # Instalation guidelines
