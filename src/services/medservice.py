@@ -1,4 +1,4 @@
-import requests
+import requests, re
 from bs4 import BeautifulSoup as bs
 import pandas as pd
 from src.utils.initdb import db
@@ -160,6 +160,20 @@ def MedDetails(id, name):
     Insert(response['data'])
     return response
 
+#data should be bsoup html data, return value string
+def spacing(data):
+    #no seperate classes or id found hence putting everythihng in description
+    data = str(data) \
+                .replace("<br/>","\n") \
+                .replace("<br>", "\n") 
+    
+    #spacing
+    data = data \
+                .replace("</li>","\n</li>") \
+                .replace("</p>", " </p>") \
+                .replace("</div>"," </div>")   
+    return bs(data, 'html.parser') 
+
 # scrapped
 def OtcDetails(content):
     # from db find the url of the key given
@@ -172,26 +186,28 @@ def OtcDetails(content):
                 .replace("<br/>","\n") \
                 .replace("<br>", "\n") 
 
-    med_desc = bs(med_desc, 'html.parser').get_text()
+    med_desc = spacing(med_desc[0]).get_text()
+    med_desc = re.sub("\t+", " ", med_desc)
     return med_desc
 
 
 def DrugDetails(content):
 
+    content = spacing(content)
     med_desc = content.find_all('div', {
-        'class': 'DrugOverview__content___22ZBX'})[0].text.strip()
+        'class': 'DrugOverview__content___22ZBX'})[0].get_text()
     # print(med_desc)
 
     med_side = content.find_all('div', {
         'class': 'DrugOverview__list-container' +
-        '___2eAr6 DrugOverview__content___22ZBX'})[0].text.strip()
+        '___2eAr6 DrugOverview__content___22ZBX'})[0].get_text()
     # print(med_side)
 
     med_use = content.find_all('div', {
-        'class': 'ShowMoreArray__tile___2mFZk'})[0].text.strip()
+        'class': 'ShowMoreArray__tile___2mFZk'})[0].get_text()
     # print(med_use)
     med_ing = content.find_all('div', {
-        'class': 'saltInfo DrugHeader__meta-value___vqYM0'})[0].text.strip()
+        'class': 'saltInfo DrugHeader__meta-value___vqYM0'})[0].get_text()
 
     return med_desc, med_side, med_use, med_ing
 

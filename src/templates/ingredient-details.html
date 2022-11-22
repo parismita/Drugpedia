@@ -60,12 +60,18 @@
             <div class="row mt-4">
               <div class="col-md-2"></div>
               <div class="col-md=8">
+                {% if ingredient_details_response['use'] %}
                 <p>Uses</p>
-                <p id="desc" style="text-align: justify; font-size: 11pt;">{{ ingredient_details_response['use'] }}</p>
+                <p id="desc" style="text-align: justify; font-size: 11pt; white-space: break-spaces;">{{ ingredient_details_response['use'] }}</p>
+                {% endif %}
+                {% if ingredient_details_response['side_effect'] %}
                 <p class="mt-5">Side effects</p>
-                <p id="desc" style="text-align: justify; font-size: 11pt;">{{ ingredient_details_response['side_effect'] }}</p>
+                <p id="desc" style="text-align: justify; font-size: 11pt; white-space: break-spaces;">{{ ingredient_details_response['side_effect'] }}</p>
+                {% endif %}
+                {% if ingredient_details_response['precautions'] %}
                 <p class="mt-5">Precautions</p>
-                <p id="desc" style="text-align: justify; font-size: 11pt;">{{ ingredient_details_response['precautions'] }}</p>
+                <p id="desc" style="text-align: justify; font-size: 11pt; white-space: break-spaces;">{{ ingredient_details_response['precautions'] }}</p>
+                {% endif %}
               </div>
               <div class="col-md-2"></div>
             </div>
