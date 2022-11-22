@@ -36,7 +36,7 @@ def Get(url):
     except Exception as e:
 	    print(str(e))
 
-def Details(key, name):
+def IngredientDetails(key, name):
     if(key=="" or key==None):
         return {
         "status": 404,
@@ -93,7 +93,7 @@ def Details(key, name):
     }
 
 
-def Search(key):
+def IngredientSearch(key):
     if(key=="" or key==None):
         return {
         "status": 404,
