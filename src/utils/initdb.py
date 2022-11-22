@@ -2,6 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+
 def create_db():
     try:
         # create tables if not exists.
@@ -12,4 +13,3 @@ def create_db():
     except Exception as e:
         print(e)
         return '==================TABLES NOT CREATED!!!=================='
-
