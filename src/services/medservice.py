@@ -181,6 +181,10 @@ def OtcDetails(content):
 
     med_desc = content.find_all('div', {
         'class': 'ProductDescription__description-content___A_qCZ'})
+    
+    med_desc = str(med_desc[0]) \
+                .replace("<br/>","\n") \
+                .replace("<br>", "\n") 
 
     med_desc = spacing(med_desc[0]).get_text()
     med_desc = re.sub("\t+", " ", med_desc)
