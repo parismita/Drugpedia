@@ -8,8 +8,8 @@ def create_db():
         # create tables if not exists.
         db.create_all()
         db.session.commit()
-        return '==================TABLES CREATED=================='
+        return
 
     except Exception as e:
         print(e)
-        return '==================TABLES NOT CREATED!!!=================='
+        return
